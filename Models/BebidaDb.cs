@@ -30,10 +30,11 @@ namespace BankApp.Models
                 while(reader.Read())
                 {
                     string Nombre = reader.GetString(1);
+                    string Marca = reader.GetString(2);
 
                     int Cantidad = reader.GetInt32(3);
 
-                    Vino vino = new Vino(Nombre, Cantidad);
+                    Vino vino = new Vino(Nombre, Marca, Cantidad);
                     vinos.Add(vino);
                 }
 
@@ -43,6 +44,29 @@ namespace BankApp.Models
             }
 
             return vinos;
+        }
+
+
+        public void Add(Vino vino)
+        {
+            string query = "insert into bebida (id, nombre, marca, alcohol, cantidad) values(@id, @nombre, @marca, @alcohol, @cantidad)";
+
+            using(var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@id", 3);
+                command.Parameters.AddWithValue("@nombre", vino.Nombre);
+                command.Parameters.AddWithValue("@marca", vino.Marca);
+                command.Parameters.AddWithValue("@alcohol", vino.Alcohol);
+                command.Parameters.AddWithValue("@cantidad", vino.Cantidad);
+
+                connection.Open() ;
+
+                command.ExecuteNonQuery();
+
+                connection.Close();
+            }
         }
     }
 }

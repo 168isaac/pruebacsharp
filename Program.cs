@@ -2,6 +2,12 @@
 
 BebidaDb bebida = new BebidaDb();
 
+//Insertando en la base de datos
+Vino vinoObj = new Vino("Bebida tres", "Marca tres", 344);
+vinoObj.Alcohol = 1212;
+
+bebida.Add(vinoObj);
+
 var vinos = bebida.GetAll();
 
 foreach(var vino in vinos)

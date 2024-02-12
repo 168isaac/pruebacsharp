@@ -8,7 +8,7 @@ namespace BankApp.Models
 {
     internal class Cerveza : Bebida, IBebidaAlcoholica
     {
-        public Cerveza(string Nombre, int Cantidad) : base(Nombre, Cantidad)
+        public Cerveza(string Nombre,string Marca, int Cantidad) : base(Nombre, Marca, Cantidad)
         {
 
         }
